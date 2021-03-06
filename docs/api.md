@@ -37,7 +37,7 @@ Here is an exemple to achieve this:
 
 ```javascript
 const express = require('express')
-const proxyMiddleware = require('http-proxy-middleware')
+const { createProxyMiddleware } = require('http-proxy-middleware')
 const MailDev = require('maildev')
 const app = express()
 
@@ -54,7 +54,7 @@ maildev.listen(function (err) {
 })
 
 // proxy all maildev requests to the maildev app
-const proxy = proxyMiddleware('/maildev', {
+const proxy = createProxyMiddleware('/maildev', {
   target: `http://localhost:1080`,
   ws: true,
 })

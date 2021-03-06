@@ -9,7 +9,7 @@ const assert = require('assert')
 const path = require('path')
 const nodemailer = require('nodemailer')
 const express = require('express')
-const proxyMiddleware = require('http-proxy-middleware')
+const { createProxyMiddleware } = require('http-proxy-middleware')
 const got = require('got')
 
 const MailDev = require('../index.js')
@@ -36,7 +36,7 @@ describe('middleware', function () {
     })
 
     // proxy all maildev requests to the maildev app
-    const proxy = proxyMiddleware('/maildev', {
+    const proxy = createProxyMiddleware('/maildev', {
       target: 'http://localhost:1080',
       ws: true,
       logLevel: 'silent'
